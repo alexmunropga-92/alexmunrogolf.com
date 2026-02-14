@@ -1,0 +1,8 @@
+/*
+Theme Name: AJM Theme
+Author: Alex Munro
+Description: A custom theme for WordPress
+Version: 1.0
+*/
+
+@import url('./tailwind-output.css');

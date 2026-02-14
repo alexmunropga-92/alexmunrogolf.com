@@ -1,0 +1,32 @@
+NAV UL  {
+    display: flex;
+    justify-content: end;
+}
+NAV UL LI  {
+    padding:0px 10px;
+    height: 95px;
+    display: flex;
+    align-items: center;
+}
+NAV UL LI:has(.sub-menu):hover .sub-menu {
+    display: block;
+}
+NAV UL LI UL.sub-menu {
+    position: absolute;
+    width: 100%;
+    min-height: 300px;
+    left: 0px;
+    top: 95px;
+    background-color: white;
+    z-index: 100;
+    border-top: 1px solid var(--blue);
+    border-radius: 0px 0px 10px 10px;
+    display: flex;
+    justify-content: start;
+    padding:40px;
+    display: none;
+}
+NAV UL LI UL.sub-menu LI {
+    color:var(--blue);
+    height: auto;
+}

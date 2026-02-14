@@ -1,0 +1,1 @@
+<a class="bg-white text-lg rounded-[50px] border-white text-[var(--blue)] border py-3 px-8 inline-block hover:bg-[var(--blue)] hover:text-white transition duration-300" href="<?php the_permalink(); ?>">Read More</a>
