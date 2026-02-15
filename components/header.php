@@ -8,11 +8,23 @@
             </a>
          </div>
          <div class="col-span-10">
-            <nav class="flex items-center justify-end">
+            <nav class="flex items-center justify-end space-x-5 text-sm">
                 <?php wp_nav_menu(array(
-                    'theme_location' => 'primary_menu'
+                    'theme_location' => 'primary_menu',
+                    'fallback_cb' => false,
                 )); ?>
-                <a class="py-2 ms-4 px-6 border border-green-700 rounded-[50px]">Contact</a>
+                <?php
+                    get_template_part(
+                    'components/button',
+                        null,
+                        [
+                            'text' => 'Contact Us',
+                            'url'  => '/contact',
+                            'variant' => 'secondary',
+                            'additional_classes' => 'text-sm'
+                        ]
+                    );
+                  ?>
             </nav>
          </div>
       </div>

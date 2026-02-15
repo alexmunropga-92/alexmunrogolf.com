@@ -1,6 +1,16 @@
-<div class="overlay bg-cover bg-no-repeat relative py-40 bg-[url('http://netgain-nutrition.local/wp-content/uploads/2025/05/tennis_coaching.webp')]">
+<section class="overlay bg-cover bg-no-repeat relative py-40 bg-[url('http://localhost:10014/wp-content/uploads/2026/02/newsletter_background.jpg')]">
     <div class="container mx-auto relative z-20 text-center">
-        <h3 class="text-white mb-5 text-5xl font-semibold">Get In Touch</h3>   
-        <?php echo do_shortcode('[newsletter_form form="2"]'); ?>
+            <?php
+                get_template_part(
+                'components/internal-header',
+                    null,
+                    [
+                        'text' => 'Subscribe to our newsletter for the latest tips and updates.',
+                        'header_type' => 'h2',
+                        'additional_classes' => 'text-white mb-5'
+                    ]
+                ); 
+            ?>
+        <?php echo do_shortcode('[mailpoet_form id="1"]'); ?>
     </div>
-</div>
+</section>

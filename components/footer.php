@@ -11,9 +11,8 @@
                 )); ?>
             </div>
             <div class="col-span-7">
-                <img class="max-w-[220px] me-0 ms-auto" src="http://netgain-nutrition.local/wp-content/uploads/2025/05/payment_methods.png">
-                <a class="block text-end text-base mt-2">info@netgainnutrition.co.uk</a>
-                <a class="block text-end">07736171967</a>
+                <a class="block text-end text-base mt-2">alex@alexmunrogolf.com</a>
+                <a class="block text-end">07960404806</a>
             </div>
         </div>
     </div>

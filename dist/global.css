@@ -34,7 +34,7 @@ BODY {
     opacity: 0.6;
     top:0px;
     left:0px;
-    z-index: 10;
+    z-index: 2;
 }
 
 .content-block P {
@@ -65,7 +65,32 @@ FOOTER UL LI {
     @apply bg-green-500 text-white font-primary py-3 px-6 rounded-lg;
 }
 
+/* Mailpoet */
+#mailpoet_form_1 form.mailpoet_form {
+    display: flex;
+    gap: 15px;
+}
 
+#mailpoet_form_1 form.mailpoet_form .mailpoet_paragraph {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 0px;
+    width:80%;
+    border-radius: 50px;
+}
+#mailpoet_form_1 form.mailpoet_form .mailpoet_paragraph input:focus-within {
+    outline:none;
+    border: none !important;
+}
+#mailpoet_form_1 form.mailpoet_form .mailpoet_paragraph.last {
+    width:20%;
+    background-color:var(--blue);
+    color:white;
+    transition: all 0.3s ease;
 
-
-/* End WooCommerce */
+}
+#mailpoet_form_1 form.mailpoet_form .mailpoet_paragraph.last:hover {
+    background-color:white;
+    color:var(--blue);
+    cursor:pointer;
+}
