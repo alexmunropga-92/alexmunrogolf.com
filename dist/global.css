@@ -60,6 +60,10 @@ FOOTER UL LI {
     display: none;
 }
 
+/* Buttons */
+.btn-primary {
+    @apply bg-green-500 text-white font-primary py-3 px-6 rounded-lg;
+}
 
 
 
