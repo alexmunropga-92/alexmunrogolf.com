@@ -8,8 +8,13 @@ Template Name: Basic Page
 get_template_part('components/head');
 get_template_part('components/header');
 ?>
-
-<?php get_template_part('components/page-header'); ?>
+<?php $banner_image = get_field('banner_image'); ?>
+<?php get_template_part('components/page-header',
+    null,
+    [
+        'image' => $banner_image,
+    ]); 
+?>
 <section class="py-12">
     <div class="container mx-auto">
         <div class="flex space-x-10 items-center">
@@ -32,6 +37,9 @@ get_template_part('components/header');
                 <p>Level 2 PGA Coach</p>
                 <p>Level 2 TPI Certified Instructor</p>
             </div>
+        </div>
+        <div class="prose py-12 max-w-none text-[var(--blue)] [&>h3]:text-[var(--blue)] [&>h2]:text-[var(--blue)]">
+            <?php the_content(); ?>
         </div>
     </div>
 </section>
