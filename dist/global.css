@@ -94,3 +94,12 @@ FOOTER UL LI {
     color:var(--blue);
     cursor:pointer;
 }
+
+/* Custom Plugins */
+.wp-block-ajm-plugin-two-column-text .row {
+    display: flex;
+    padding-block: 2rem;
+}
+.wp-block-ajm-plugin-two-column-text .row .column {
+    width:50%;
+}

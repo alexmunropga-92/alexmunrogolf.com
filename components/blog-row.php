@@ -1,15 +1,19 @@
 <?php /* Blog */ ?>
-<section class="py-12">
+<section class="py-6">
     <div class="container mx-auto">
         <?php
-            get_template_part(
-                'components/internal-header',
-                null,
-                [
-                    'text' => 'Tips & Advice',
-                    'header_type' => 'h2'
-                ]
-            );
+            if(!isset($args['display_header'])) {
+                // do nothing
+            } else {
+                get_template_part(
+                    'components/internal-header',
+                    null,
+                    [
+                        'text' => 'Tips & Advice',
+                        'header_type' => 'h2'
+                    ]
+                );
+            }
         ?>
         <div class="grid grid-cols-12 gap-4 my-10">
             <?php 
