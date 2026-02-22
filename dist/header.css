@@ -4,7 +4,6 @@ NAV UL  {
 }
 NAV UL LI  {
     padding:0px 10px;
-    height: 95px;
     display: flex;
     align-items: center;
 }

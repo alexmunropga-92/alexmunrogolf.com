@@ -1,7 +1,7 @@
 :root {
-    --green:#24500F;
+    --green:#0F6A4B;
     --greyDark:#3B3B3B;
-    --blue:#03396c;
+    --blue:#1C2A39;
     --black:#141414;
     --fontPrimary:'Roboto', sans-serif;
     --fontSecondary:"Montserrat", sans-serif;
@@ -35,6 +35,16 @@ BODY {
     top:0px;
     left:0px;
     z-index: 2;
+}
+.overlay-left:before {
+    content:'';
+    position:absolute;
+    background:linear-gradient(90deg, var(--blue) 0%, transparent 100%);
+    top:0px;
+    left: 0px;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
 }
 
 .content-block P {
@@ -102,4 +112,23 @@ FOOTER UL LI {
 }
 .wp-block-ajm-plugin-two-column-text .row .column {
     width:50%;
+}
+
+/* Transitions */
+.transition-section {
+    transition: all 0.4s ease;
+    transform:translateY(60px);
+    opacity: 0;
+}
+.transition-section.transition-section--visible {
+    transform:translateY(0px);
+    opacity: 1;
+}
+
+/* Parallax */
+.parallax-section {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center 30px;
+    background-repeat: no-repeat;
 }

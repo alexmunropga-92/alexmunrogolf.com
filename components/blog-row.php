@@ -1,6 +1,6 @@
 <?php /* Blog */ ?>
-<section class="py-6">
-    <div class="container mx-auto">
+<section class="py-6" x-data="{ show: false }" x-intersect:enter="show = true">
+    <div class="container mx-auto transition-section" :class="show ? 'transition-section--visible' : ''">
         <?php
             if(!isset($args['display_header'])) {
                 // do nothing

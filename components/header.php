@@ -1,5 +1,5 @@
 <?php $site_icon_url = get_site_icon_url( 150 );?>
-<header class="h-[95px] shadow-xl">
+<header class="shadow-xl py-1">
    <div class="container mx-auto relative h-full">
       <div class="grid grid-cols-12 items-center h-full">
          <div class="col-span-2">

@@ -1,4 +1,9 @@
-<section>
+<section
+    x-data="{ visible: false }"
+    x-intersect="visible = true"
+    :class="visible ? 'transition-section--visible' : ''"
+    class="transition-section"
+    >
     <div class="container mx-auto">
         <div class="grid grid-cols-12 gap-x-12 items-center">
             <div class="col-span-5">

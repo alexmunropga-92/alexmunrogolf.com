@@ -1,5 +1,5 @@
-<section class="overlay bg-cover bg-no-repeat relative py-40 bg-[url('http://localhost:10014/wp-content/uploads/2026/02/newsletter_background.jpg')]">
-    <div class="container mx-auto relative z-20 text-center">
+<section x-data="{show: false}" x-intersect:enter="show = true" class="overlay bg-cover bg-no-repeat relative py-40 bg-[url('http://localhost:10014/wp-content/uploads/2026/02/newsletter_background.jpg')]">
+    <div class="container mx-auto relative z-20 text-center transition-section" :class="show ? 'transition-section--visible' : ''">
             <?php
                 get_template_part(
                 'components/internal-header',
