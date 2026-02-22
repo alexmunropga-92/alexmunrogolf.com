@@ -132,3 +132,9 @@ FOOTER UL LI {
     background-position: center 30px;
     background-repeat: no-repeat;
 }
+.parallax-section--top {
+    background-position: top;
+}
+.parallax-section--bottom {
+    background-position: bottom;
+}

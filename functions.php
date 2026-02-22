@@ -24,6 +24,23 @@ function amg_enqueue_styles() {
     );
 }
 
+//Custom Post Types
+function register_services() {
+    register_post_type('services', [
+        'labels' => [
+            'name' => 'Services',
+            'singular_name' => 'Service',
+            'add_new_item'       => 'Add New Service',
+        ],
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => ['slug' => 'services'],
+        'supports' => ['title', 'editor', 'thumbnail'],
+        'menu_icon' => 'dashicons-portfolio',
+    ]);
+}
+add_action('init', 'register_services');
+
 function amg_files() {
     wp_enqueue_script('googleMap','//maps.googleapis.com/maps/api/js?key=AIzaSyBSjuX_x2iM3RQ_zhiu9c1ozvpzOW9Y8jo', NULL, '1.0', true);
 

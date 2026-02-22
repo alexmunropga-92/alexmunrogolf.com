@@ -17,4 +17,4 @@ get_template_part('components/page-header', null, [
     </div>
 </section>
 
-<?php get_footer(); ?>
+<?php get_template_part('components/footer'); ?>
