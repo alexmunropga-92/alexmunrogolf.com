@@ -1,0 +1,40 @@
+<?php $current_post_id = get_the_ID(); ?>
+<?php $categories = wp_get_post_categories($current_post_id); ?>
+
+<?php $args = array(
+    'category__in'   => $categories,
+    'post__not_in'   => array($current_post_id),
+    'posts_per_page' => 3,
+    'orderby'        => 'rand'
+); ?>
+
+<?php $related_posts = get_posts($args); ?>
+<?php if($related_posts) { ?>
+    <div class="mt-15">
+        <h3 class="text-xl font-bold text-blue mb-4">Related Articles</h3>
+        <div class="flex flex-col">
+            <?php foreach($related_posts as $post) { ?>
+                <div class="mb-2 border border-blue rounded-md p-3">
+                    <div class="flex space-x-4">
+                        <div class="text-blue w-2/3 p-3">
+                            <p class="text-xs font-semibold"><?php echo get_the_date(); ?></p>
+                            <h4 class="font-semibold text-lg"><?php echo get_the_title($post->ID); ?></h4>
+                            <?php get_template_part('components/button', 
+                                null,
+                                [
+                                    'text' => 'Read More',
+                                    'url' => get_permalink($post->ID),
+                                    'variant' => 'secondary',
+                                    'additional_classes' => 'text-sm !py-2 !px-4 mt-3'
+                                ]
+                            ); ?>
+                        </div>
+                        <div class="aspect-square w-1/3 overflow-hidden rounded-md">
+                            <img class="h-full rounded-md w-full object-cover" src="<?php echo get_the_post_thumbnail_url($post->ID, 'full'); ?>" alt="<?php echo get_the_title($post->ID); ?>" />
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+<?php } ?>

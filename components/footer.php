@@ -13,6 +13,12 @@
             <div class="col-span-7">
                 <a class="block text-end text-base mt-2">alex@alexmunrogolf.com</a>
                 <a class="block text-end">07960404806</a>
+                <?php get_template_part('components/social-icon-row', 
+                    null,
+                    [
+                        'additional_classes' => 'justify-end mt-4'
+                    ]
+                ); ?>
             </div>
         </div>
     </div>
