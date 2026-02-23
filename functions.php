@@ -35,7 +35,7 @@ function register_services() {
         'public' => true,
         'has_archive' => true,
         'rewrite' => ['slug' => 'services'],
-        'supports' => ['title', 'editor', 'thumbnail'],
+        'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
         'menu_icon' => 'dashicons-portfolio',
     ]);
 }

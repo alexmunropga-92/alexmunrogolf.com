@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-green-500: oklch(72.3% 0.219 149.579);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-white: #fff;
@@ -723,6 +722,15 @@
   .aspect-\[2\/1\] {
     aspect-ratio: 2/1;
   }
+  .aspect-\[4\/3\] {
+    aspect-ratio: 4/3;
+  }
+  .aspect-\[5\/3\] {
+    aspect-ratio: 5/3;
+  }
+  .aspect-\[5\/4\] {
+    aspect-ratio: 5/4;
+  }
   .aspect-square {
     aspect-ratio: 1 / 1;
   }
@@ -846,9 +854,21 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  .border-r {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 1px;
+  }
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
+  }
+  .border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
   }
   .border-\[var\(--blue\)\] {
     border-color: var(--blue);
@@ -870,6 +890,9 @@
   }
   .bg-\[var\(--blue\)\] {
     background-color: var(--blue);
+  }
+  .bg-blue {
+    background-color: var(--color-blue);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -934,11 +957,23 @@
   .py-22 {
     padding-block: calc(var(--spacing) * 22);
   }
+  .py-30 {
+    padding-block: calc(var(--spacing) * 30);
+  }
   .py-40 {
     padding-block: calc(var(--spacing) * 40);
   }
   .py-\[3rem\] {
     padding-block: 3rem;
+  }
+  .ps-10 {
+    padding-inline-start: calc(var(--spacing) * 10);
+  }
+  .ps-12 {
+    padding-inline-start: calc(var(--spacing) * 12);
+  }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
   }
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
@@ -1013,9 +1048,25 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .transition-transform {
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
   .duration-300 {
     --tw-duration: 300ms;
     transition-duration: 300ms;
+  }
+  .duration-400 {
+    --tw-duration: 400ms;
+    transition-duration: 400ms;
+  }
+  .group-hover\:scale-\[1\.1\] {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        scale: 1.1;
+      }
+    }
   }
   .hover\:bg-\[var\(--blue\)\] {
     &:hover {
@@ -1068,6 +1119,18 @@
   .\[\&\>h3\]\:text-blue {
     &>h3 {
       color: var(--color-blue);
+    }
+  }
+  .\[\&\>p\]\:text-sm {
+    &>p {
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+  }
+  .\[\&\>p\]\:text-xs {
+    &>p {
+      font-size: var(--text-xs);
+      line-height: var(--tw-leading, var(--text-xs--line-height));
     }
   }
 }
