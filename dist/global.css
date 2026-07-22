@@ -79,6 +79,10 @@ FOOTER UL LI {
 #mailpoet_form_1 form.mailpoet_form {
     display: flex;
     gap: 15px;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 #mailpoet_form_1 form.mailpoet_form .mailpoet_paragraph {
@@ -87,6 +91,9 @@ FOOTER UL LI {
     margin-bottom: 0px;
     width:80%;
     border-radius: 50px;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 }
 #mailpoet_form_1 form.mailpoet_form .mailpoet_paragraph input:focus-within {
     outline:none;
@@ -97,6 +104,9 @@ FOOTER UL LI {
     background-color:var(--blue);
     color:white;
     transition: all 0.3s ease;
+    @media screen and (max-width: 768px) {
+        width: 50%;
+    }
 
 }
 #mailpoet_form_1 form.mailpoet_form .mailpoet_paragraph.last:hover {
@@ -137,4 +147,27 @@ FOOTER UL LI {
 }
 .parallax-section--bottom {
     background-position: bottom;
+}
+
+/* Forms */
+.form-wrapper form {
+    background-color: var(--blue);
+    border-radius: 4px;
+    padding:25px !important;
+}
+
+.form-wrapper form input, .form-wrapper form textarea {
+    background-color: white;
+    border: 1px solid white;
+    color: var(--blue);
+    padding: 12px 20px !important;
+    width:100% !important;
+    border-radius: 4px;
+}
+.form-wrapper form textarea {
+    min-height: 200px !important;
+}
+
+.form-wrapper form .mailpoet_form_columns {
+    margin-bottom: 0px !important;
 }

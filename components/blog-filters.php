@@ -1,3 +1,7 @@
+<?php
+    $archive = $args['archive'] ?? null;
+?>
+
 <section>
     <div class="container mx-auto">
         <div class="border-b border-blue/[50%] pb-4 pt-6 flex justify-between items-center">
@@ -5,10 +9,13 @@
             <div class="flex space-x-2">
                 <?php 
                     $categories = get_categories();
-                    foreach($categories as $category) {
-                        echo '<span class="tag"><a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></span>';
-                    }
-                ?>
+                    foreach($categories as $category) { ?>
+                        <span class="tag <?php if (isset($archive) && $category->name == $archive->name) { ?> bg-white text-blue <?php } ?>">
+                            <a href="<?php echo get_category_link($category->term_id); ?>">
+                                <?php echo $category->name; ?>
+                            </a>
+                        </span>
+                    <? } ?>
             </div>
         </div>
     </div>

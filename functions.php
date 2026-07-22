@@ -70,6 +70,22 @@ function amg_files() {
         true
     );
 
+    // Enqueue Swiper
+    
+    wp_enqueue_style(
+        'swiper',
+        get_template_directory_uri() . '/node_modules/swiper/swiper-bundle.min.css',
+        [],
+    );
+
+    wp_enqueue_script(
+        'swiper',
+        get_template_directory_uri() . '/node_modules/swiper/swiper-bundle.min.js',
+        [],
+        '11.2.10',
+        true
+    );
+
 }
 
 add_action('wp_enqueue_scripts', 'amg_files'); 
@@ -90,5 +106,6 @@ add_filter('category_template', function($template) {
 
 //Add fields
 add_theme_support('post-thumbnails');
+
 
 ?>

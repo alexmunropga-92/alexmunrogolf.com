@@ -10,6 +10,8 @@ get_template_part('components/header');
 ?>
 <?php $banner_image = get_field('banner_image'); ?>
 <?php $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>
+
+
 <?php get_template_part('components/page-header',
     null,
     [

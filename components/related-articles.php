@@ -1,14 +1,6 @@
 <?php $current_post_id = get_the_ID(); ?>
-<?php $categories = wp_get_post_categories($current_post_id); ?>
+<?php $related_posts = get_field('associated_articles', $current_post_id); ?>
 
-<?php $args = array(
-    'category__in'   => $categories,
-    'post__not_in'   => array($current_post_id),
-    'posts_per_page' => 3,
-    'orderby'        => 'rand'
-); ?>
-
-<?php $related_posts = get_posts($args); ?>
 <?php if($related_posts) { ?>
     <div class="mt-15">
         <h3 class="text-xl font-bold text-blue mb-4">Related Articles</h3>
