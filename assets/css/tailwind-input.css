@@ -32,4 +32,14 @@
     .swiper-pagination-bullet {
         @apply !bg-blue !w-4 !h-4 !mx-1
     }
+    .prose ul {
+        @apply !pl-0;
+    }
+    .prose ul li {
+        list-style:none;
+        @apply relative !pl-5
+    }
+    .prose ul li:before {
+        @apply content-[''] w-2.5 h-2.5 bg-blue left-0 top-2 rounded-full absolute
+    }
 }

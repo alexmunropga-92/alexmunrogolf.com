@@ -18,7 +18,7 @@
                     'components/button',
                         null,
                         [
-                            'text' => 'Contact Us',
+                            'text' => 'Contact',
                             'url'  => '/contact',
                             'variant' => 'secondary',
                             'additional_classes' => 'text-sm'

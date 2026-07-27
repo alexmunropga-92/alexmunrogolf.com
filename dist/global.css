@@ -63,6 +63,9 @@ FOOTER UL {
 }
 FOOTER UL LI {
     width:50%;
+    @media screen and (max-width: 640px) {
+        width:100%;
+    }
 }
 
 

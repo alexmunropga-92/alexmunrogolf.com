@@ -1,49 +1,90 @@
+<?php
+$display_header = $args['display_header'] ?? false;
+$header = $args['header'] ?? 'Our Services';
+?>
 <section class="py-6" x-data="{ show: false }" x-intersect:enter="show = true">
     <div class="container mx-auto transition-section" :class="show ? 'transition-section--visible' : ''">
-        <div class="grid grid-cols-12 py-12">
-            <?php 
-                $args = array(
-                    'post_type'      => 'services',
-                    'posts_per_page' => -1,         
-                    'post_status'    => 'publish'
-                );
-                $services = new WP_Query($args);
-
-                if ($services->have_posts())  { 
-                while ($services->have_posts()) {
-                    $services->the_post();
-                    $thumbnail_id = get_post_thumbnail_id();
-                    $thumbnail_url = wp_get_attachment_image_src( $thumbnail_id, 'full' );
-                    $price = get_field('service_price');
-                    ?>
-                    <div class="col-span-4 border border-[var(--blue)] rounded-lg p-5 bg-blue group">
-                        <a href="<?php the_permalink(); ?>">
-                            <div class="overflow-hidden aspect-[5/4] mb-5">
-                                <img class="h-full rounded-md w-full object-cover group-hover:scale-[1.1] transition-transform duration-400" src="<?php echo $thumbnail_url[0]; ?>" alt="<?php the_title() ?>" />
-                            </div>
-                            <h2 class="text-2xl mb-1 mt-4 font-bold text-white"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                            <div>
-                                <p class="text-white text-sm"><?php echo get_the_excerpt(); ?></p>
-                                <dov class="flex items-center justify-between border-t border-white pt-5 mt-5">
-                                    <p class="text-xl font-semibold text-white"><?php echo $price; ?> </p>
-                                    <div class="border-l border-blue ps-12">
-                                    <?php get_template_part(
-                                        'components/button',
-                                        null,
-                                        [
-                                            'text' => 'Read More',
-                                            'url'  => get_permalink(),
-                                            'additional_classes' => 'text-sm'
-                                        ]
-                                    ); ?>
+        <?php if($display_header) {
+            get_template_part(
+                'components/internal-header',
+                null,
+                [
+                    'text' => $header,
+                    'header_type' => 'h2',
+                    'additional_classes' => 'col-span-12'
+                ]
+            );
+        } ?>
+        <div class="swiper service-swiper">
+            <div class="swiper-wrapper">
+                <?php 
+                    $args = array(
+                        'post_type'      => 'services',
+                        'posts_per_page' => -1,         
+                        'post_status'    => 'publish',
+                    );
+                    $services = new WP_Query($args);
+                    if ($services->have_posts())  { 
+                    while ($services->have_posts()) {
+                        $services->the_post();
+                        $thumbnail_id = get_post_thumbnail_id();
+                        $thumbnail_url = wp_get_attachment_image_src( $thumbnail_id, 'full' );
+                        $price = get_field('service_price');
+                        ?>
+                        <div class="swiper-slide border border-[var(--blue)] rounded-lg p-5 bg-blue group">
+                            <a href="<?php the_permalink(); ?>">
+                                <div class="overflow-hidden aspect-[5/4] mb-5">
+                                    <img class="h-full rounded-md w-full object-cover group-hover:scale-[1.1] transition-transform duration-400" src="<?php echo $thumbnail_url[0]; ?>" alt="<?php the_title() ?>" />
+                                </div>
+                                <h2 class="text-2xl mb-1 mt-4 font-bold text-white"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                                <div>
+                                    <p class="text-white text-sm"><?php echo get_the_excerpt(); ?></p>
+                                    <dov class="flex items-center justify-between border-t border-white pt-5 mt-5">
+                                        <p class="text-xl font-semibold text-white"><?php echo $price; ?> </p>
+                                        <div class="border-l border-blue ps-12">
+                                        <?php get_template_part(
+                                            'components/button',
+                                            null,
+                                            [
+                                                'text' => 'Read More',
+                                                'url'  => get_permalink(),
+                                                'additional_classes' => 'sm:text-sm'
+                                            ]
+                                        ); ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                <?php  }  ?>
-            <?php } ?>
+                            </a>
+                        </div>
+                    <?php  }  ?>
+                <?php } ?>
+            </div>
         </div>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const swiper = new Swiper('.service-swiper', {
+            loop: true,
+            slidesPerView: 3,
+            spaceBetween: 10,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    centredSlides: true,
+                },
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    });
+    </script>
 
 </section>

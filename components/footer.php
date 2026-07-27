@@ -1,22 +1,22 @@
 <?php $site_icon_url = get_site_icon_url( 150 );?>
 <footer>
-    <div class="container mx-auto py-[3rem]">
-        <div class="grid grid-cols-12 items-center">
-            <div class="col-span-2">
-                <img class="max-w-[70px]" src="<?php echo esc_url( $site_icon_url ); ?>" alt="Site Icon">
+    <div class="container mx-auto py-8 sm:py-[3rem]">
+        <div class="grid grid-cols-12 items-center text-center sm:text-start gap-y-5 sm:gap-0">
+            <div class="col-span-12 sm:col-span-2">
+                <img class="max-w-[70px] mx-auto sm:ms-0" src="<?php echo esc_url( $site_icon_url ); ?>" alt="Site Icon">
             </div>
-            <div class="col-span-3">
+            <div class="col-span-12 sm:col-span-4 lg:col-span-3 text-sm md:text-base">
                 <?php wp_nav_menu(array(
                     'theme_location' => 'footer_menu'
                 )); ?>
             </div>
-            <div class="col-span-7">
-                <a class="block text-end text-base mt-2">alex@alexmunrogolf.com</a>
-                <a class="block text-end">07960404806</a>
+            <div class="col-span-12 sm:col-span-6 lg:col-span-7">
+                <a class="block sm:text-end text-base mt-2 text-sm md:text-base">alex@alexmunrogolf.com</a>
+                <a class="block sm:text-end text-sm md:text-base">07960404806</a>
                 <?php get_template_part('components/social-icon-row', 
                     null,
                     [
-                        'additional_classes' => 'justify-end mt-4'
+                        'additional_classes' => 'justify-center sm:justify-end mt-4'
                     ]
                 ); ?>
             </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="bg-[var(--blue)] py-6">
         <div class="container mx-auto">
-            <div class="flex items-center space-x-3 font-regular text-white">
+            <div class="flex items-center justify-center sm:justify-start space-x-3 font-regular text-white text-sm sm:text-base">
                 <p>Privacy Policy</p>
                 <span>/</span>
                 <p>Cookie Policy</p>
