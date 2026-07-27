@@ -15,7 +15,7 @@
                 );
             }
         ?>
-        <div class="my-5 blog-swiper swiper">
+        <div class="blog-swiper swiper">
             <div class="swiper-wrapper">
                 <?php 
                     $blog_query = new WP_Query([

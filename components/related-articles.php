@@ -1,6 +1,4 @@
-<?php $current_post_id = get_the_ID(); ?>
-<?php $related_posts = get_field('associated_articles', $current_post_id); ?>
-
+<?php $related_posts = $args['related_posts'] ?? null; ?>
 <?php if($related_posts) { ?>
     <div class="mt-15">
         <h3 class="text-xl font-bold text-blue mb-4">Related Articles</h3>
