@@ -6,14 +6,19 @@ NAV UL  {
 }
 NAV UL LI  {
     padding:0px 10px;
+    position: relative;
     @media screen and (min-width:640px) {
         display: flex;
         align-items: center;
+        height:75px;
     }
     @media screen and (max-width:640px) {
        padding:8px;
         
     }
+}
+NAV UL LI:has(.sub-menu) {
+    position: relative;
 }
 NAV UL LI:has(.sub-menu):hover .sub-menu {
     display: block;
@@ -21,21 +26,39 @@ NAV UL LI:has(.sub-menu):hover .sub-menu {
 NAV UL LI UL.sub-menu {
     position: absolute;
     width: 100%;
-    min-height: 300px;
-    left: 0px;
-    top: 95px;
+    min-width: 200px;
+    right: 0px;
+    top: 74px;
     background-color: white;
     z-index: 100;
-    border-top: 1px solid var(--blue);
+    /* border-top: 1px solid var(--blue); */
     border-radius: 0px 0px 10px 10px;
-    display: flex;
-    justify-content: start;
-    padding:40px;
+    /* display: flex;
+    justify-content: start; */
+    padding:20px;
     display: none;
 }
 NAV UL LI UL.sub-menu LI {
     color:var(--blue);
     height: auto;
+    padding:10px 0px;
+}
+
+NAV UL LI A {
+    position: relative;
+}
+NAV UL LI A:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: var(--blue);
+    left: 0px;
+    bottom:-5px;
+}
+NAV UL LI:hover > A:before {
+    width: 100%;
+    transition: all 0.3s ease-in-out;
 }
 
 /* Mobile Menu */

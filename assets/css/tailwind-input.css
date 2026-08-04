@@ -42,4 +42,7 @@
     .prose ul li:before {
         @apply content-[''] w-2.5 h-2.5 bg-blue left-0 top-2 rounded-full absolute
     }
+    .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+        @apply !text-blue
+    }
 }

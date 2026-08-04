@@ -13,18 +13,18 @@
                     'theme_location' => 'primary_menu',
                     'fallback_cb' => false,
                 )); ?>
-                <?php
+               <?php
                     get_template_part(
                     'components/button',
                         null,
                         [
-                            'text' => 'Contact',
-                            'url'  => '/contact',
+                            'text' => 'Book Now',
+                            'url'  => 'https://launchacademybristol.as.me/schedule/b5b7e2b4/?calendarIds=13800920',
                             'variant' => 'secondary',
                             'additional_classes' => 'text-sm'
                         ]
                     );
-                  ?>
+               ?>
             </nav>
             <div id="mobileNavToggle" @click="mobileNavToggle = !mobileNavToggle, mobileMenuDisplay = !mobileMenuDisplay" class="ms-auto me-0 float-right sm:hidden"
                :class="{ 'mobile-menu-toggle--open': mobileNavToggle }">
@@ -32,7 +32,6 @@
                <div class="icon-bar bg-blue h-1 w-8 mb-1 relative"></div>
                <div class="icon-bar bg-blue h-1 w-8 mb-1 relaitve"></div>
             </div>
-            
             <?php get_template_part('components/mobile-menu'); ?>
          </div>
       </div>

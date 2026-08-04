@@ -8,6 +8,15 @@ get_template_part('components/page-header', null, [
 ]); 
 ?>
 
-<?php get_template_part('components/service-row'); ?>
+<div class="container mx-auto">
+    <div class="prose py-8 md:py-12 max-w-none">
+        <?php
+        $content = get_post_field('post_content', 84);
+        echo apply_filters('the_content', $content);
+        ?>
+    </div>
+</div>
+
+<?php get_template_part('components/service-listing-grid'); ?>
 
 <?php get_template_part('components/footer'); ?>

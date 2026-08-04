@@ -1,6 +1,5 @@
 <?php
 $args = $args ?? [];
-
 $text = $args['text'] ?? 'Learn More';
 $url = $args['url'] ?? home_url('/');
 $variant = $args['variant'] ?? 'primary';

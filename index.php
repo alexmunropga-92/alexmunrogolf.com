@@ -23,7 +23,7 @@
                     ]
                 ); 
             ?>
-            <p class="text-xl">Providing top-quality sports nutrition advice for peak performance in youth athletes</p>
+            <p class="text-xl">What I believe makes me an effective golf coach is my ability to analyze any swing and be able to identify the areas that are not functioning correctly. From there I am able to devise a strategy to address the issue that is simple and easy for the player to work with.</p>
             <?php
                 get_template_part(
                 'components/button',

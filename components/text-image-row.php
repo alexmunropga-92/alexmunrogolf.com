@@ -17,8 +17,21 @@
                     <p>I am a PGA Professional based in the city ofs Bristol in England. After playing to a good standard of amateur golf including at college level I 
                         decided to turn Professional at the age of 19. Although I still compete when possible I dedicate the majority of my time to developing my 
                         coaching skill set. This enables me to provide an exceptional learning experience for all my clients which allows the individual to 
-                        quickly develop their golfing skills.</p>
+                        quickly develop their golfing skills.
+                    </p>
                 </div>
+                <?php
+                    get_template_part(
+                    'components/button',
+                        null,
+                        [
+                            'text' => 'Get In Touch',
+                            'url'  => '/contact',
+                            'variant' => 'secondary',
+                            'additional_classes' => 'mt-8'
+                        ]
+                    );
+               ?>
             </div>
         </div>
     </div>

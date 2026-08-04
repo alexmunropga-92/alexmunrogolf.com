@@ -13,7 +13,7 @@ get_template_part('components/page-header', null, [
 
 <section>
     <div class="container mx-auto">
-        <?php get_template_part('components/blog-row'); ?>
+        <?php get_template_part('components/blog-listing-grid'); ?>
     </div>
 </section>
 

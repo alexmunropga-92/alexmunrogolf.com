@@ -5,12 +5,13 @@
             <div class="col-span-12 sm:col-span-2">
                 <img class="max-w-[70px] mx-auto sm:ms-0" src="<?php echo esc_url( $site_icon_url ); ?>" alt="Site Icon">
             </div>
-            <div class="col-span-12 sm:col-span-4 lg:col-span-3 text-sm md:text-base">
+            <div class="col-span-12 sm:col-span-5 text-sm md:text-base">
                 <?php wp_nav_menu(array(
-                    'theme_location' => 'footer_menu'
+                    'theme_location' => 'footer_menu',
+                    'fallback_cb' => false,
                 )); ?>
             </div>
-            <div class="col-span-12 sm:col-span-6 lg:col-span-7">
+            <div class="col-span-12 sm:col-span-5">
                 <a class="block sm:text-end text-base mt-2 text-sm md:text-base">alex@alexmunrogolf.com</a>
                 <a class="block sm:text-end text-sm md:text-base">07960404806</a>
                 <?php get_template_part('components/social-icon-row', 

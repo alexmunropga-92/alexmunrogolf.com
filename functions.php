@@ -41,6 +41,11 @@ function register_services() {
 }
 add_action('init', 'register_services');
 
+//Existing post types support
+add_action('init', function () {
+    add_post_type_support('page', 'excerpt');
+});
+
 function amg_files() {
     wp_enqueue_script('googleMap','//maps.googleapis.com/maps/api/js?key=AIzaSyBSjuX_x2iM3RQ_zhiu9c1ozvpzOW9Y8jo', NULL, '1.0', true);
 

@@ -12,7 +12,7 @@ get_template_part('components/header');
 <?php $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>
 <?php $current_post_id = get_the_ID(); ?>
 <?php $related_posts = get_field('associated_articles', $current_post_id); ?>
-
+<?php $hide_featured_image = get_field('hide_featured_image', $current_post_id); ?>
 
 <?php get_template_part('components/page-header',
     null,
@@ -25,15 +25,23 @@ get_template_part('components/header');
         <div class="grid grid-cols-12 xl:py-20 py-8 lg:gap-x-8">
             <div class="col-span-12 lg:col-span-8">
                 <div class="prose !max-w-none text-blue [&>h3]:text-blue [&>h2]:text-blue">
-                    <div class="overflow-hidden aspect-square rounded-md">
-                        <img class="rounded-md w-full h-full object-cover !my-0" src="<?php echo $image_url; ?>" alt="<?php the_title(); ?>" />
-                    </div>
+                    <?php if($image_url && $hide_featured_image == 'no') { ?>
+                        <div class="overflow-hidden aspect-square rounded-md">
+                            <img class="rounded-md w-full h-full object-cover !my-0" src="<?php echo $image_url; ?>" alt="<?php the_title(); ?>" />
+                        </div>
+                    <?php } ?>
                     <div class="block lg:hidden">
                         <p class="font-semibold text-blue mb-2">By Alex Munro</p>
                         <?php get_template_part('components/social-icon-row'); ?>
                     </div>
                     <?php the_content(); ?>
                 </div>
+                <?php get_template_part('components/button', null, [
+                    'url' => '/contact',
+                    'variant' => 'secondary',
+                    'additional_classes' => 'mt-8',
+                    'text' => 'Get In Touch',
+                ]); ?>
             </div>
             <div class="col-span-4 lg:block hidden">
                 <?php get_template_part('components/blog-sidebar', null, [
