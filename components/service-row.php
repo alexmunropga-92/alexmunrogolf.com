@@ -16,7 +16,7 @@ $header = $args['header'] ?? 'Our Services';
             );
         } ?>
         <div class="swiper service-swiper">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper items-stretch">
                 <?php 
                     $args = array(
                         'post_type'      => 'services',
@@ -31,14 +31,14 @@ $header = $args['header'] ?? 'Our Services';
                         $thumbnail_url = wp_get_attachment_image_src( $thumbnail_id, 'full' );
                         $price = get_field('service_price');
                         ?>
-                        <div class="swiper-slide border border-[var(--blue)] rounded-lg p-5 bg-blue group">
+                        <div class="swiper-slide border border-[var(--blue)] rounded-lg p-5 bg-blue group h-auto">
                             <a href="<?php the_permalink(); ?>">
                                 <div class="overflow-hidden aspect-[5/4] mb-5">
                                     <img class="h-full rounded-md w-full object-cover group-hover:scale-[1.1] transition-transform duration-400" src="<?php echo $thumbnail_url ? $thumbnail_url[0] : 'http://localhost:10014/wp-content/uploads/2026/02/main_header.jpg' ?>" alt="<?php the_title() ?>" />
                                 </div>
                                 <h2 class="text-2xl mb-1 mt-4 font-bold text-white"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                                 <div>
-                                    <p class="text-white text-sm"><?php echo get_the_excerpt(); ?></p>
+                                    <p class="text-white min-h-[100px] text-sm"><?php echo get_the_excerpt(); ?></p>
                                     <div class="flex items-center justify-between border-t border-white pt-5 mt-5">
                                         <p class="text-xl font-semibold text-white"><?php echo $price; ?> </p>
                                         <div class="border-l border-blue ps-5">

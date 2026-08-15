@@ -30,7 +30,7 @@
                     null,
                     [
                         'text' => 'Learn More',
-                        'url'  => '/contact',
+                        'url'  => '/about',
                         'additional_classes' => 'mt-10'
                     ]
                 );

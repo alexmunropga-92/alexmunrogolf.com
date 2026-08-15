@@ -5,7 +5,7 @@
                 'components/internal-header',
                     null,
                     [
-                        'text' => 'Subscribe to our newsletter for the latest tips and updates.',
+                        'text' => 'Subscribe to the newsletter for the latest tips and updates.',
                         'header_type' => 'h2',
                         'additional_classes' => 'text-white mb-5'
                     ]

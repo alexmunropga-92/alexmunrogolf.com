@@ -30,14 +30,16 @@ get_template_part('components/header');
                 <div class="prose max-w-none text-blue [&>h3]:text-blue [&>h2]:text-blue">
                     <?php the_content(); ?>
                 </div>
+                <?php $service_link = get_field('service_link'); ?>
+                <?php $service_link_text = get_field('service_link_text'); ?>
                 <?php
                     get_template_part(
                     'components/button',
                         null,
                         [
-                            'text' => 'Book Now',
-                            'url'  => 'https://launchacademybristol.as.me/schedule/b5b7e2b4/?calendarIds=13800920',
-                            'variant' => 'secondary',
+                            'text' => $service_link_text ? $service_link_text : 'Book Now',
+                            'url'  => $service_link ? $service_link : 'https://launchacademybristol.as.me/schedule/b5b7e2b4/?calendarIds=13800920',
+                            'variant' => 'secondary',   
                             'additional_classes' => 'mt-10'
                         ]
                     );

@@ -35,23 +35,22 @@ $article_count = $args['article_count'] ?? 3;
                     $thumbnail_url = wp_get_attachment_image_src( $thumbnail_id, 'full' );
                     ?>
                     
-                    <div class="swiper-slide border border-blue rounded-lg p-3 sm:p-5">
+                    <div class="swiper-slide border border-blue bg-blue rounded-lg p-3 sm:p-5">
                         <div class="overflow-hidden aspect-[5/4]">
-                            <img class="h-full rounded-msd w-full object-cover" src="<?php echo $thumbnail_url[0]; ?>" alt="<?php the_title() ?>" />
+                            <img class="h-full rounded-md w-full object-cover" src="<?php echo $thumbnail_url[0]; ?>" alt="<?php the_title() ?>" />
                         </div>
                         <div class="p-2 sm:py-0">
-                            <h2 class="text-xl sm:text-2xl sm:min-h-25 mb-1 mt-4 font-bold text-[var(--blue)]"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                            <p class="text-md sm:text-lg font-semibold mb-2 text-[var(--blue)]"><?php the_time('d M Y'); ?></p>
-                            <div class="p-2 sm:py-0">
-                                <p class="text-[var(--blue)]"><?php the_excerpt(); ?></p>
+                            <h2 class="text-xl sm:text-2xl sm:min-h-25 mb-1 mt-4 font-bold text-white"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                            <p class="text-md sm:text-lg font-semibold mb-2 text-white"><?php the_time('d M Y'); ?></p>
+                            <div class="py-2 sm:py-0 text-white">
+                                <p><?php the_excerpt(); ?></p>
                                 <?php get_template_part(
                                     'components/button',
                                     null,
                                     [
                                         'text' => 'Read More',
                                         'url'  => get_permalink(),
-                                        'additional_classes' => '!text-sm mt-5',
-                                        'variant' => 'secondary'
+                                        'additional_classes' => '!text-sm mt-5'
                                     ]
                                 ); ?>
                             </div>

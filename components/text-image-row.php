@@ -25,10 +25,11 @@
                     'components/button',
                         null,
                         [
-                            'text' => 'Get In Touch',
-                            'url'  => '/contact',
+                            'text' => 'Book a free consultation',
+                            'url'  => 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ13o6dJT_13Qh86pyu-Olb5G7PHJaiNbl20-9iph3P7DsQgcJoE5_OWtrH1sq2WO0VX3gcI1RxX',
                             'variant' => 'secondary',
-                            'additional_classes' => 'mt-8'
+                            'additional_classes' => 'mt-8',
+                            'additional_attributes' => 'target="_blank"'
                         ]
                     );
                ?>

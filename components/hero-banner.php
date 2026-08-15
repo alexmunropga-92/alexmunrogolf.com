@@ -12,8 +12,8 @@
                 'components/button',
                     null,
                     [
-                        'text' => 'Learn More',
-                        'url'  => '/contact',
+                        'text' => 'Get In Touch',
+                        'url'  => '/about',
                     ]
                 );
             ?>
