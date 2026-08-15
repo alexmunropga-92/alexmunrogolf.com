@@ -26,11 +26,11 @@
     <div class="bg-[var(--blue)] py-6">
         <div class="container mx-auto">
             <div class="flex items-center justify-center sm:justify-start space-x-3 font-regular text-white text-sm sm:text-base">
-                <p>Privacy Policy</p>
+                <p><a href="/privacy-policy">Privacy Policy</a></p>
                 <span>/</span>
-                <p>Cookie Policy</p>
+                <p><a href="/cookie-policy">Cookie Policy</a></p>
                 <span>/</span>
-                <p>Terms & Conditions</p>
+                <p><a href="/terms-and-conditions">Terms & Conditions</a></p>
             </div>
         </div>
     </div>

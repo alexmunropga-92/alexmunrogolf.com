@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Basic Page
+Template Name: About Page
 */
 ?>
 
