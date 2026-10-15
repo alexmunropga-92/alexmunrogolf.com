@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-green-500: oklch(72.3% 0.219 149.579);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-white: #fff;
@@ -786,12 +785,6 @@
   .min-h-\[100px\] {
     min-height: 100px;
   }
-  .min-h-\[150px\] {
-    min-height: 150px;
-  }
-  .min-h-\[200px\] {
-    min-height: 200px;
-  }
   .w-1\/2 {
     width: calc(1/2 * 100%);
   }
@@ -957,6 +950,9 @@
   .bg-\[url\(\'http\:\/\/netgain-nutrition\.local\/wp-content\/uploads\/2025\/05\/tennis-practise-image\.png\'\)\] {
     background-image: url('http://netgain-nutrition.local/wp-content/uploads/2025/05/tennis-practise-image.png');
   }
+  .bg-\[url\(\'https\:\/\/alexmunrogolf\.com\/wp-content\/uploads\/2026\/02\/newsletter_background\.jpg\'\)\] {
+    background-image: url('https://alexmunrogolf.com/wp-content/uploads/2026/02/newsletter_background.jpg');
+  }
   .bg-cover {
     background-size: cover;
   }
@@ -1016,6 +1012,9 @@
   }
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
+  }
+  .pt-30 {
+    padding-top: calc(var(--spacing) * 30);
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
@@ -1150,6 +1149,11 @@
   .sm\:ms-0 {
     @media (width >= 40rem) {
       margin-inline-start: calc(var(--spacing) * 0);
+    }
+  }
+  .sm\:mt-0 {
+    @media (width >= 40rem) {
+      margin-top: calc(var(--spacing) * 0);
     }
   }
   .sm\:flex {
