@@ -207,10 +207,16 @@ FOOTER UL LI {
 
 /* Parallax */
 .parallax-section {
-    background-attachment: fixed;
+    background-attachment: scroll;
     background-size: cover;
     background-position: center 30px;
     background-repeat: no-repeat;
+}
+/* iOS Safari does not support fixed backgrounds, so only use them with a mouse */
+@media (hover: hover) and (pointer: fine) {
+    .parallax-section {
+        background-attachment: fixed;
+    }
 }
 .parallax-section--top {
     background-position: top;
