@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-700: oklch(50.5% 0.213 27.518);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-black: #141414;
@@ -978,14 +977,14 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .bg-\[url\(\'http\:\/\/localhost\:10014\/wp-content\/uploads\/2026\/02\/philosophy_background\.jpg\'\)\] {
-    background-image: url('http://localhost:10014/wp-content/uploads/2026/02/philosophy_background.jpg');
-  }
   .bg-\[url\(\'http\:\/\/netgain-nutrition\.local\/wp-content\/uploads\/2025\/05\/tennis-practise-image\.png\'\)\] {
     background-image: url('http://netgain-nutrition.local/wp-content/uploads/2025/05/tennis-practise-image.png');
   }
   .bg-\[url\(\'https\:\/\/alexmunrogolf\.com\/wp-content\/uploads\/2026\/02\/newsletter_background\.jpg\'\)\] {
     background-image: url('https://alexmunrogolf.com/wp-content/uploads/2026/02/newsletter_background.jpg');
+  }
+  .bg-\[url\(\'https\:\/\/alexmunrogolf\.com\/wp-content\/uploads\/2026\/02\/philosophy_background\.jpg\'\)\] {
+    background-image: url('https://alexmunrogolf.com/wp-content/uploads/2026/02/philosophy_background.jpg');
   }
   .bg-cover {
     background-size: cover;

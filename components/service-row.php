@@ -34,7 +34,7 @@ $header = $args['header'] ?? 'Our Services';
                         <div class="swiper-slide border border-[var(--blue)] rounded-lg p-5 bg-blue group h-auto">
                             <a href="<?php the_permalink(); ?>">
                                 <div class="overflow-hidden aspect-[5/4] mb-5">
-                                    <img class="h-full rounded-md w-full object-cover group-hover:scale-[1.1] transition-transform duration-400" src="<?php echo $thumbnail_url ? $thumbnail_url[0] : 'http://localhost:10014/wp-content/uploads/2026/02/main_header.jpg' ?>" alt="<?php the_title() ?>" />
+                                    <img class="h-full rounded-md w-full object-cover group-hover:scale-[1.1] transition-transform duration-400" src="<?php echo $thumbnail_url ? $thumbnail_url[0] : 'https://alexmunrogolf.com/wp-content/uploads/2026/02/main_header.jpg' ?>" alt="<?php the_title() ?>" />
                                 </div>
                                 <h2 class="text-2xl mb-1 mt-4 font-bold text-white"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                                 <div>

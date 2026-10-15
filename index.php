@@ -7,7 +7,7 @@
 
 
 <section x-data="{ show: false }" x-intersect:enter="show = true">
-    <div style="background-image:url('https://alexmunrogolf.com/wp-content/uploads/2026/02/philosophy_background.jpg')" class="overlay bg-cover bg-no-repeat relative py-12 sm:py-20 lg:py-40 bg-[url('http://localhost:10014/wp-content/uploads/2026/02/philosophy_background.jpg')]">
+    <div style="background-image:url('https://alexmunrogolf.com/wp-content/uploads/2026/02/philosophy_background.jpg')" class="overlay bg-cover bg-no-repeat relative py-12 sm:py-20 lg:py-40 bg-[url('https://alexmunrogolf.com/wp-content/uploads/2026/02/philosophy_background.jpg')]">
         <div 
         class="container mx-auto text-center relative text-white z-10 transition-section"
         :class="show ? 'transition-section--visible' : ''"
