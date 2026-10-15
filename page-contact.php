@@ -24,9 +24,7 @@ get_template_part('components/header');
                     <hr class="my-10 h-[2px] !text-blue"/>
                 </div>
                 <div class="col-span-7">
-                    <div class="form-wrapper">
-                        <?php echo do_shortcode('[mailpoet_form id="2"]'); ?>
-                    </div>
+                    <?php get_template_part('components/enquiry-form'); ?>
                 </div>
             </div>
 

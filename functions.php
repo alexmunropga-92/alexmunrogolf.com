@@ -118,37 +118,47 @@ add_filter('walker_nav_menu_start_el', function($item_output, $item, $depth, $ar
         . '</button>';
 }, 10, 4);
 
-//Contact Form (MailPoet form #2): email every enquiry to Alex as soon as it passes the CAPTCHA
-add_action('mailpoet_subscription_before_subscribe', function($data, $segment_ids, $form) {
-    if ((int) $form->getId() !== 2) {
-        return;
+//Enquiry form: email every enquiry straight to Alex (not a newsletter signup, nothing is stored in MailPoet)
+function ajm_handle_enquiry() {
+    $back = wp_validate_redirect(esc_url_raw(wp_unslash($_POST['redirect_to'] ?? '')), home_url('/'));
+    $finish = function ($status) use ($back) {
+        wp_safe_redirect(add_query_arg('enquiry', $status, $back) . '#enquiry');
+        exit;
+    };
+
+    // Honeypot: bots fill this in, people never see it
+    if (!empty($_POST['website'])) {
+        $finish('sent');
     }
 
-    $first_name = sanitize_text_field($data['first_name'] ?? '');
-    $last_name = sanitize_text_field($data['last_name'] ?? '');
-    $email = sanitize_email($data['email'] ?? '');
-    $phone = sanitize_text_field($data['cf_3'] ?? ''); // MailPoet custom field "Phone Number"
-    $message = sanitize_textarea_field($data['cf_1'] ?? ''); // MailPoet custom field "Message"
+    $first_name = sanitize_text_field(wp_unslash($_POST['first_name'] ?? ''));
+    $last_name = sanitize_text_field(wp_unslash($_POST['last_name'] ?? ''));
+    $email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
+    $phone = sanitize_text_field(wp_unslash($_POST['phone'] ?? ''));
+    $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
 
-    if (!is_email($email)) {
-        return;
+    if ($first_name === '' || !is_email($email) || $message === '') {
+        $finish('error');
     }
 
-    $name = trim("$first_name $last_name") ?: $email;
-    $page = wp_get_referer() ?: home_url('/');
+    $name = trim("$first_name $last_name");
     $body = "Name: $name\n"
         . "Email: $email\n"
         . "Phone: " . ($phone ?: '-') . "\n"
-        . "Page: $page\n\n"
+        . "Page: $back\n\n"
         . "Message:\n$message\n";
 
-    wp_mail(
-        'alex@alexmunrogolf.com',
+    $sent = wp_mail(
+        'alexmunropga@gmail.com',
         'New website enquiry from ' . $name,
         $body,
-        ['Reply-To: ' . $name . ' <' . $email . '>']
+        ['Reply-To: ' . str_replace(['"', "\r", "\n"], '', $name) . ' <' . $email . '>']
     );
-}, 10, 3);
+
+    $finish($sent ? 'sent' : 'error');
+}
+add_action('admin_post_ajm_enquiry', 'ajm_handle_enquiry');
+add_action('admin_post_nopriv_ajm_enquiry', 'ajm_handle_enquiry');
 
 function ajm_enquiry_scripts() {
     wp_enqueue_script(

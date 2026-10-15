@@ -29,9 +29,7 @@ $additional_classes = $args['additional_classes'] ?? '';
                 <p class="text-white font-semibold">Phone: <a href="tel:07960404806">07960404806</a></p>
             </div>
             <div class="col-span-12 md:col-span-7">
-                <div class="form-wrapper">
-                    <?php echo do_shortcode('[mailpoet_form id="2"]'); ?>
-                </div>
+                <?php get_template_part('components/enquiry-form'); ?>
             </div>
         </div>
     </div>

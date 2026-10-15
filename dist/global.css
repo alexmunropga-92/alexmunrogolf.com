@@ -241,14 +241,21 @@ FOOTER UL LI {
 .form-wrapper form .mailpoet_form_columns {
     margin-bottom: 0px !important;
 }
-/* MailPoet CAPTCHA text sits on the blue form background */
-.form-wrapper .mailpoet_captcha_container,
-.form-wrapper .mailpoet_captcha_label {
-    color: white;
+.enquiry-form__submit {
+    background-color: white;
+    color: var(--blue);
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 4px;
+    border: 1px solid white;
+    cursor: pointer;
+}
+.enquiry-form__submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
 }
 /* After a successful send, replace the form with a short thank-you (the popup shows the full message) */
-.form-wrapper--sent form > *:not(.mailpoet_message),
-.form-wrapper--sent .mailpoet_validate_success {
+.form-wrapper--sent form > * {
     display: none !important;
 }
 .form-wrapper--sent form::before {
