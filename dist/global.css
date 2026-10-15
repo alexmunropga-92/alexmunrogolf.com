@@ -216,7 +216,6 @@ FOOTER UL LI {
 @media (hover: hover) and (pointer: fine) {
     .parallax-section {
         background-attachment: fixed;
-        background-position: center 30px;
     }
 }
 .parallax-section--top {
