@@ -63,22 +63,73 @@ NAV UL LI:hover > A:before {
 
 /* Mobile Menu */
 #mobileMenu {
-    left:100%;
-    transition:all 0.3s ease-in-out;
+    left: 0;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
 }
 
 #mobileMenu.mobile-menu--open {
-    left:0
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.3s ease-in-out, visibility 0s;
 }
 
+#mobileMenu UL LI {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    height: auto;
+}
+
+/* No hover underline on mobile menu links */
+#mobileMenu UL LI A:before {
+    content: none;
+}
+
+/* Sub-menus become an accordion instead of a hover dropdown */
+#mobileMenu UL LI UL.sub-menu {
+    position: static;
+    display: none;
+    flex-basis: 100%;
+    min-width: 0;
+    padding: 4px 0 0 16px;
+    border-radius: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+#mobileMenu UL LI.is-open > UL.sub-menu {
+    display: block;
+}
+
+#mobileMenu .sub-menu-toggle {
+    padding: 8px;
+    margin: -8px -8px -8px 0;
+    color: var(--blue);
+    cursor: pointer;
+}
+
+#mobileMenu .sub-menu-toggle SVG {
+    transition: transform 0.3s ease-in-out;
+}
+
+#mobileMenu LI.is-open > .sub-menu-toggle SVG {
+    transform: rotate(180deg);
+}
+
+#mobileNavToggle .icon-bar {
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+}
 
 #mobileNavToggle.mobile-menu-toggle--open .icon-bar:last-of-type {
-    display:none;
+    opacity: 0;
 }
 
 #mobileNavToggle.mobile-menu-toggle--open .icon-bar:first-of-type {
-    transform: rotate(45deg);
-    top:8px;
+    transform: translateY(8px) rotate(45deg);
 }
 
 #mobileNavToggle.mobile-menu-toggle--open .icon-bar:nth-of-type(2) {

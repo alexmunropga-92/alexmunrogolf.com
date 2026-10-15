@@ -1,4 +1,11 @@
 <?php $site_icon_url = get_site_icon_url( 150 );?>
+<?php
+    // Enquiry form on every page, except the contact page which already has its own form
+    if (!is_page_template('page-contact.php') && !is_page('contact')) {
+        get_template_part('components/enquiry-block');
+    }
+    get_template_part('components/enquiry-thank-you');
+?>
 <footer>
     <div class="container mx-auto py-8 sm:py-[3rem]">
         <div class="grid grid-cols-12 items-center text-center sm:text-start gap-y-5 sm:gap-0">

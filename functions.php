@@ -105,12 +105,69 @@ function ajm_features() {
 }
 add_action('after_setup_theme', 'ajm_features');
 
+//Mobile menu: add a toggle button to items with sub-menus
+add_filter('walker_nav_menu_start_el', function($item_output, $item, $depth, $args) {
+    if (empty($args->ajm_mobile_menu) || !in_array('menu-item-has-children', (array) $item->classes, true)) {
+        return $item_output;
+    }
+    $label = esc_attr(sprintf('Show %s sub-menu', $item->title));
+    return $item_output . '<button type="button" class="sub-menu-toggle" aria-label="' . $label . '"'
+        . ' x-data="{ subOpen: false }" :aria-expanded="subOpen.toString()" aria-expanded="false"'
+        . ' @click.stop="subOpen = !subOpen; $el.parentElement.classList.toggle(\'is-open\', subOpen)">'
+        . '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'
+        . '</button>';
+}, 10, 4);
+
+//Contact Form (MailPoet form #2): email every enquiry to Alex as soon as it passes the CAPTCHA
+add_action('mailpoet_subscription_before_subscribe', function($data, $segment_ids, $form) {
+    if ((int) $form->getId() !== 2) {
+        return;
+    }
+
+    $first_name = sanitize_text_field($data['first_name'] ?? '');
+    $last_name = sanitize_text_field($data['last_name'] ?? '');
+    $email = sanitize_email($data['email'] ?? '');
+    $phone = sanitize_text_field($data['cf_3'] ?? ''); // MailPoet custom field "Phone Number"
+    $message = sanitize_textarea_field($data['cf_1'] ?? ''); // MailPoet custom field "Message"
+
+    if (!is_email($email)) {
+        return;
+    }
+
+    $name = trim("$first_name $last_name") ?: $email;
+    $page = wp_get_referer() ?: home_url('/');
+    $body = "Name: $name\n"
+        . "Email: $email\n"
+        . "Phone: " . ($phone ?: '-') . "\n"
+        . "Page: $page\n\n"
+        . "Message:\n$message\n";
+
+    wp_mail(
+        'alex@alexmunrogolf.com',
+        'New website enquiry from ' . $name,
+        $body,
+        ['Reply-To: ' . $name . ' <' . $email . '>']
+    );
+}, 10, 3);
+
+function ajm_enquiry_scripts() {
+    wp_enqueue_script(
+        'enquiry-form',
+        get_template_directory_uri() . '/assets/js/enquiry-form.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/enquiry-form.js'),
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'ajm_enquiry_scripts');
+
 add_filter('category_template', function($template) {
     return get_template_directory() . '/archive.php';
 });
 
 //Add fields
 add_theme_support('post-thumbnails');
+
 
 
 ?>

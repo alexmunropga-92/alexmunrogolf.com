@@ -1,6 +1,19 @@
 <?php $site_icon_url = get_site_icon_url( 150 );?>
 <header class="shadow-xl py-1 fixed top-0 left-0 w-full z-100 bg-white">
-   <div  x-data="{ mobileNavToggle: false, mobileMenuDisplay:false }" class="container mx-auto relative h-full">
+   <div
+      x-data="{
+         open: false,
+         headerHeight: 0,
+         setHeaderHeight() { this.headerHeight = this.$root.closest('header').offsetHeight },
+         toggle() { this.setHeaderHeight(); this.open = !this.open },
+         close() { this.open = false }
+      }"
+      x-init="setHeaderHeight()"
+      x-effect="document.documentElement.style.overflow = open ? 'hidden' : ''"
+      @keydown.escape.window="close()"
+      @resize.window="setHeaderHeight(); if (window.innerWidth >= 640) close()"
+      class="container mx-auto relative h-full"
+      >
       <div class="grid grid-cols-12 items-center h-full">
          <div class="col-span-2">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
@@ -26,12 +39,21 @@
                     );
                ?>
             </nav>
-            <div id="mobileNavToggle" @click="mobileNavToggle = !mobileNavToggle, mobileMenuDisplay = !mobileMenuDisplay" class="ms-auto me-0 float-right sm:hidden"
-               :class="{ 'mobile-menu-toggle--open': mobileNavToggle }">
-               <div class="icon-bar bg-blue h-1 w-8 mb-1 relative"></div>
-               <div class="icon-bar bg-blue h-1 w-8 mb-1 relative"></div>
-               <div class="icon-bar bg-blue h-1 w-8 mb-1 relaitve"></div>
-            </div>
+            <button
+               id="mobileNavToggle"
+               type="button"
+               @click="toggle()"
+               aria-controls="mobileMenu"
+               :aria-expanded="open.toString()"
+               :aria-label="open ? 'Close menu' : 'Open menu'"
+               aria-label="Open menu"
+               class="ms-auto me-0 float-right sm:hidden p-2 -me-2 cursor-pointer"
+               :class="{ 'mobile-menu-toggle--open': open }"
+               >
+               <span class="icon-bar block bg-blue h-1 w-8 mb-1 relative"></span>
+               <span class="icon-bar block bg-blue h-1 w-8 mb-1 relative"></span>
+               <span class="icon-bar block bg-blue h-1 w-8 relative"></span>
+            </button>
             <?php get_template_part('components/mobile-menu'); ?>
          </div>
       </div>
