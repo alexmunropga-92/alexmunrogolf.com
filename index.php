@@ -4,6 +4,7 @@
 <?php get_template_part('components/hero-banner'); ?>
 
 <?php get_template_part('components/text-image-row'); ?>
+<?php get_template_part('components/bristol-intro'); ?>
 
 
 <section x-data="{ show: false }" x-intersect:enter="show = true">

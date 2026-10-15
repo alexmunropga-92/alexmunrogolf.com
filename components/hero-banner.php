@@ -13,7 +13,7 @@
                     null,
                     [
                         'text' => 'Get In Touch',
-                        'url'  => '/about',
+                        'url'  => '/contact',
                     ]
                 );
             ?>

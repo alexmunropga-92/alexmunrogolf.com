@@ -5,6 +5,7 @@
 $banner_image = get_field('banner_image', 54); 
 get_template_part('components/page-header', null, [
     'image' => $banner_image,
+    'custom_title' => get_the_title(84),
 ]); 
 ?>
 

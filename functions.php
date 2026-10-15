@@ -178,6 +178,34 @@ add_filter('category_template', function($template) {
 //Add fields
 add_theme_support('post-thumbnails');
 
+//Let WordPress/Yoast output the <title> tag
+add_theme_support('title-tag');
 
+//Local business schema (home page) to reinforce the Bristol service area
+add_action('wp_head', function () {
+    if (!is_front_page()) {
+        return;
+    }
+    $schema = [
+        '@context'    => 'https://schema.org',
+        '@type'       => 'ProfessionalService',
+        'name'        => 'Alex Munro Golf',
+        'description' => 'Golf lessons and golf coaching in Bristol with PGA Professional Alex Munro.',
+        'url'         => home_url('/'),
+        'telephone'   => '+447960404806',
+        'email'       => 'alex@alexmunrogolf.com',
+        'areaServed'  => ['@type' => 'City', 'name' => 'Bristol'],
+        'founder'     => ['@type' => 'Person', 'name' => 'Alex Munro', 'jobTitle' => 'PGA Professional Golf Coach'],
+    ];
+    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n";
+});
+
+//Services archive: use the SEO title and description from the Services page (ID 84)
+add_filter('wpseo_title', function ($title) {
+    return is_post_type_archive('services') ? (get_post_meta(84, '_yoast_wpseo_title', true) ?: $title) : $title;
+});
+add_filter('wpseo_metadesc', function ($desc) {
+    return is_post_type_archive('services') ? (get_post_meta(84, '_yoast_wpseo_metadesc', true) ?: $desc) : $desc;
+});
 
 ?>
