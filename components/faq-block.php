@@ -8,24 +8,25 @@
     ]);
 ?>
 
-<script application/ld+json>
-{
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        <?php foreach ($faqs as $i => $faq) : ?>
-            {
-                "@type": "Question",
-                "name": "<?php echo esc_html(get_the_title($faq)); ?>",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "<?php echo esc_html(strip_tags(apply_filters('the_content', $faq->post_content))); ?>"
-                }
-            }<?php if ($i < count($faqs) - 1) echo ','; ?>
-        <?php endforeach; ?>
-    ]
-}
-</script>
+<?php
+    // Add FAQ schema markup if there are FAQs, pass it to functions.php to print in the head
+    if ($faqs) {
+        ajm_print_schema([
+            '@context'   => 'https://schema.org',
+            '@type'      => 'FAQPage',
+            'mainEntity' => array_map(function ($faq) {
+                return [
+                    '@type'          => 'Question',
+                    'name'           => get_the_title($faq),
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text'  => trim(wp_strip_all_tags(apply_filters('the_content', $faq->post_content))),
+                    ],
+                ];
+            }, $faqs),
+        ]);
+    }
+?>
 
 <section
     x-data="{ visible: false, open: 0 }"

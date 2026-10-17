@@ -212,23 +212,148 @@ add_theme_support('post-thumbnails');
 //Let WordPress/Yoast output the <title> tag
 add_theme_support('title-tag');
 
+//Schema markup (JSON-LD)
+function ajm_print_schema($schema) {
+    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n";
+}
+
+function ajm_business_id() {
+    return home_url('/#business');
+}
+
 //Local business schema (home page) to reinforce the Bristol service area
 add_action('wp_head', function () {
     if (!is_front_page()) {
         return;
     }
+
+    // Get all published services and create Offer objects for each
+    $services = get_posts(['post_type' => 'services', 'posts_per_page' => -1, 'post_status' => 'publish']);
+    $offers = array_map(function ($service) {
+        return [
+            '@type'       => 'Offer',
+            'itemOffered' => [
+                '@type'       => 'Service',
+                'name'        => get_the_title($service),
+                'description' => wp_strip_all_tags(get_the_excerpt($service)),
+                'url'         => get_permalink($service),
+            ],
+        ];
+    }, $services);
+
+    // Define the business schema with relevant details
+    $business = [
+        '@type'        => ['ProfessionalService', 'SportsActivityLocation'],
+        '@id'          => ajm_business_id(),
+        'name'         => 'Alex Munro Golf',
+        'description'  => 'Golf lessons and golf coaching in Bristol with PGA Professional Alex Munro.',
+        'url'          => home_url('/'),
+        'telephone'    => '+447960404806',
+        'email'        => 'alex@alexmunrogolf.com',
+        'priceRange'   => '££',
+        'areaServed'   => [
+            ['@type' => 'City', 'name' => 'Bristol'],
+            ['@type' => 'AdministrativeArea', 'name' => 'Bristol, South West England'],
+        ],
+        'knowsAbout'   => ['Golf lessons', 'Golf coaching', 'Junior golf coaching', 'Short game', 'Golf swing technique'],
+        'sport'        => 'Golf',
+        'sameAs'       => [
+            'https://www.facebook.com/people/Alex-Munro-Golf-Coaching/100063679795002/',
+            'https://www.instagram.com/alexmunrogolf/',
+            'https://x.com/munroalex',
+        ],
+        'founder'      => ['@id' => home_url('/#alex-munro')],
+        'potentialAction' => [
+            '@type'  => 'ReserveAction',
+            'target' => [
+                '@type'          => 'EntryPoint',
+                'urlTemplate'    => 'https://launchacademybristol.as.me/schedule/b5b7e2b4/?calendarIds=13800920',
+                'actionPlatform' => ['http://schema.org/DesktopWebPlatform', 'http://schema.org/MobileWebPlatform'],
+            ],
+            'result' => ['@type' => 'Reservation', 'name' => 'Book a golf lesson'],
+        ],
+    ];
+
+    if ($logo_id = get_theme_mod('custom_logo')) {
+        $business['logo'] = wp_get_attachment_image_url($logo_id, 'full');
+        $business['image'] = $business['logo'];
+    }
+    if ($offers) {
+        $business['hasOfferCatalog'] = ['@type' => 'OfferCatalog', 'name' => 'Golf lessons and coaching', 'itemListElement' => $offers];
+    }
+
+    // Define the person schema for Alex Munro
+    $person = [
+        '@type'      => 'Person',
+        '@id'        => home_url('/#alex-munro'),
+        'name'       => 'Alex Munro',
+        'jobTitle'   => 'PGA Professional Golf Coach',
+        'url'        => home_url('/'),
+        'worksFor'   => ['@id' => ajm_business_id()],
+        'sameAs'     => $business['sameAs'],
+        'knowsAbout' => $business['knowsAbout'],
+    ];
+
+    // Output the combined schema for the business and the person
+    ajm_print_schema(['@context' => 'https://schema.org', '@graph' => [$business, $person]]);
+});
+
+//Service schema (single service pages)
+add_action('wp_head', function () {
+    if (!is_singular('services')) {
+        return;
+    }
     $schema = [
         '@context'    => 'https://schema.org',
-        '@type'       => 'ProfessionalService',
-        'name'        => 'Alex Munro Golf',
-        'description' => 'Golf lessons and golf coaching in Bristol with PGA Professional Alex Munro.',
-        'url'         => home_url('/'),
-        'telephone'   => '+447960404806',
-        'email'       => 'alex@alexmunrogolf.com',
+        '@type'       => 'Service',
+        'name'        => get_the_title(),
+        'description' => wp_strip_all_tags(get_the_excerpt()),
+        'url'         => get_permalink(),
+        'serviceType' => 'Golf lessons',
+        'provider'    => ['@id' => ajm_business_id()],
         'areaServed'  => ['@type' => 'City', 'name' => 'Bristol'],
-        'founder'     => ['@type' => 'Person', 'name' => 'Alex Munro', 'jobTitle' => 'PGA Professional Golf Coach'],
     ];
-    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n";
+    if ($image = get_the_post_thumbnail_url(null, 'full')) {
+        $schema['image'] = $image;
+    }
+    ajm_print_schema($schema);
+});
+
+//Blog post schema (author and publisher linked to the business)
+add_action('wp_head', function () {
+    if (!is_singular('post')) {
+        return;
+    }
+    $schema = [
+        '@context'         => 'https://schema.org',
+        '@type'            => 'BlogPosting',
+        'headline'         => get_the_title(),
+        'description'      => wp_strip_all_tags(get_the_excerpt()),
+        'url'              => get_permalink(),
+        'mainEntityOfPage' => get_permalink(),
+        'datePublished'    => get_the_date('c'),
+        'dateModified'     => get_the_modified_date('c'),
+        'author'           => ['@id' => home_url('/#alex-munro')],
+        'publisher'        => ['@id' => ajm_business_id()],
+    ];
+    if ($image = get_the_post_thumbnail_url(null, 'full')) {
+        $schema['image'] = $image;
+    }
+    ajm_print_schema($schema);
+});
+
+//Contact page schema
+add_action('wp_head', function () {
+    if (!is_page_template('page-contact.php')) {
+        return;
+    }
+    ajm_print_schema([
+        '@context'   => 'https://schema.org',
+        '@type'      => 'ContactPage',
+        'name'       => get_the_title(),
+        'url'        => get_permalink(),
+        'mainEntity' => ['@id' => ajm_business_id()],
+    ]);
 });
 
 //Services archive: use the SEO title and description from the Services page (ID 84)
