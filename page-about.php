@@ -43,4 +43,5 @@ get_template_part('components/header');
         </div>
     </div>
 </section>
+<?php get_template_part('components/faq-block'); ?>
 <?php get_template_part('components/footer'); ?>

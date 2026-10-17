@@ -3,8 +3,14 @@
 
 <?php get_template_part('components/hero-banner'); ?>
 
-<?php get_template_part('components/text-image-row'); ?>
-<?php get_template_part('components/bristol-intro'); ?>
+<?php get_template_part('components/text-image-row', null, [
+    'content' => get_field('content_block_2'),
+]); ?>
+<?php get_template_part('components/bristol-intro', null, [
+    'content' => get_field('content_block_3'),
+]); ?>
+
+<?php get_template_part('components/faq-block'); ?>
 
 
 <section x-data="{ show: false }" x-intersect:enter="show = true">

@@ -1,3 +1,4 @@
+<?php  $content = $args['content'] ?? ''; ?>
 <section
     x-data="{ visible: false }"
     x-intersect="visible = true"
@@ -13,12 +14,7 @@
             </div>
             <div class="col-span-12 md:col-span-7 order-1 md:order-2">
                 <div class="prose text-center md:text-start">
-                    <h3>“EVERY GOLFER LEARNS DIFFERENTLY. IT IS ESSENTIAL TO BE ABLE TO ASSESS A PLAYER IN A NUMBER OF WAYS SO THAT TOGETHER WE CAN FIND THE CORRECT SOLUTION. ”</h3>
-                    <p>I am a PGA Professional offering golf lessons and golf coaching in Bristol. After playing to a good standard of amateur golf including at college level I
-                        decided to turn Professional at the age of 19. Although I still compete when possible I dedicate the majority of my time to developing my
-                        coaching skill set. This enables me to provide an exceptional learning experience for all my clients which allows the individual to
-                        quickly develop their golfing skills.
-                    </p>
+                    <?php echo $content; ?>
                 </div>
                 <?php
                     get_template_part(

@@ -41,6 +41,37 @@ function register_services() {
 }
 add_action('init', 'register_services');
 
+// FAQ Custom Post Type
+function register_faq() {
+    register_post_type('faq', [
+        'labels' => [
+            'name' => 'FAQ',
+            'singular_name' => 'FAQ',
+            'add_new_item'       => 'Add New FAQ',
+        ],
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => ['slug' => 'faq'],
+        'supports' => ['title', 'editor'],
+        'menu_icon' => 'dashicons-portfolio',
+    ]);
+}
+add_action('init', 'register_faq');
+
+// Change title
+// Change FAQ title placeholder
+function change_title_placeholder($title) {
+    $screen = get_current_screen();
+
+    // Change the placeholder text for the FAQ post type
+    if ($screen && $screen->post_type === 'faq') {
+        return 'Add FAQ';
+    }
+
+    return $title;
+}
+add_filter('enter_title_here', 'change_title_placeholder');
+
 //Existing post types support
 add_action('init', function () {
     add_post_type_support('page', 'excerpt');
