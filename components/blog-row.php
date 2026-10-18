@@ -37,7 +37,7 @@ $article_count = $args['article_count'] ?? 3;
                     
                     <div class="swiper-slide border border-blue bg-blue rounded-lg p-3 sm:p-5">
                         <div class="overflow-hidden aspect-[5/4]">
-                            <img class="h-full rounded-md w-full object-cover" src="<?php echo $thumbnail_url[0]; ?>" alt="<?php the_title() ?>" />
+                            <img class="h-full rounded-md w-full object-cover" src="<?php echo $thumbnail_url ? $thumbnail_url[0] : 'https://alexmunrogolf.com/wp-content/uploads/2026/02/main_header.jpg' ?>" alt="<?php the_title() ?>" />
                         </div>
                         <div class="p-2 sm:py-0">
                             <h2 class="text-xl sm:text-2xl sm:min-h-25 mb-1 mt-4 font-bold text-white"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>

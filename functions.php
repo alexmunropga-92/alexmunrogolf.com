@@ -278,6 +278,8 @@ add_action('wp_head', function () {
         $business['logo'] = wp_get_attachment_image_url($logo_id, 'full');
         $business['image'] = $business['logo'];
     }
+
+    // Add the OfferCatalog to the business schema if there are offers
     if ($offers) {
         $business['hasOfferCatalog'] = ['@type' => 'OfferCatalog', 'name' => 'Golf lessons and coaching', 'itemListElement' => $offers];
     }
