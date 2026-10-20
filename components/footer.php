@@ -19,8 +19,8 @@
                 )); ?>
             </div>
             <div class="col-span-12 sm:col-span-5">
-                <a class="block sm:text-end text-base mt-2 text-sm md:text-base">alex@alexmunrogolf.com</a>
-                <a class="block sm:text-end text-sm md:text-base">07960404806</a>
+                <a href="mailto:alex@alexmunrogolf.com"class="block sm:text-end text-base mt-2 text-sm md:text-base">alex@alexmunrogolf.com</a>
+                <a href="tel:07960404806" class="block sm:text-end text-sm md:text-base">07960404806</a>
                 <?php get_template_part('components/social-icon-row', 
                     null,
                     [
