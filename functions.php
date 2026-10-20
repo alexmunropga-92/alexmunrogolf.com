@@ -274,6 +274,13 @@ add_action('wp_head', function () {
         ],
     ];
 
+    if ($address = ajm_address_schema()) {
+        $business['address'] = $address;
+    }
+    if ($hours = ajm_opening_hours_schema()) {
+        $business['openingHoursSpecification'] = $hours;
+    }
+
     if ($logo_id = get_theme_mod('custom_logo')) {
         $business['logo'] = wp_get_attachment_image_url($logo_id, 'full');
         $business['image'] = $business['logo'];
@@ -365,5 +372,114 @@ add_filter('wpseo_title', function ($title) {
 add_filter('wpseo_metadesc', function ($desc) {
     return is_post_type_archive('services') ? (get_post_meta(84, '_yoast_wpseo_metadesc', true) ?: $desc) : $desc;
 });
+
+// Business address setting (Settings > General), used in the footer
+function ajm_default_address() {
+    return "Bristol Golf Centre\nCommon Mead Lane\nHambrook\nBristol\nBS16 1QQ";
+}
+add_action('admin_init', function () {
+    register_setting('general', 'ajm_address', [
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'default'           => ajm_default_address(),
+    ]);
+    register_setting('general', 'ajm_opening_hours', [
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ]);
+    add_settings_field('ajm_address', 'Address', function () {
+        echo '<textarea name="ajm_address" id="ajm_address" rows="5" class="regular-text">' . esc_textarea(get_option('ajm_address', ajm_default_address())) . '</textarea>';
+        echo '<p class="description">One line per row. Shown in the site footer.</p>';
+    }, 'general');
+
+});
+
+function ajm_default_opening_hours() {
+    return "Monday: 9am - 6pm\nTuesday: 9am - 6pm\nWednesday: 9am - 6pm\nThursday: 9am - 6pm\nFriday: 9am - 6pm\nSaturday: 9am - 5pm\nSunday: Closed";
+}
+
+add_action('admin_init', function () {
+    register_setting('general', 'ajm_opening_hours', [
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'default'           => "Monday: 9am - 6pm\nTuesday: 9am - 6pm\nWednesday: 9am - 6pm\nThursday: 9am - 6pm\nFriday: 9am - 6pm\nSaturday: 9am - 5pm\nSunday: Closed",
+    ]);
+    add_settings_field('ajm_opening_hours', 'Coaching Hours', function () {
+        echo '<textarea name="ajm_opening_hours" id="ajm_opening_hours" rows="5" class="regular-text">' . esc_textarea(get_option('ajm_opening_hours', ajm_default_opening_hours())) . '</textarea>';
+    }, 'general');
+    add_settings_field('ajm_opening_hours', 'Opening Hours', function () {
+        echo '<textarea name="ajm_opening_hours" id="ajm_opening_hours" rows="5" class="regular-text" placeholder="Mon-Fri 9am-5pm&#10;Sat 10:00-14:00">' . esc_textarea(get_option('ajm_opening_hours', '')) . '</textarea>';
+        echo '<p class="description">One line per row, like <code>Monday: 9am - 5pm</code> or <code>Mon-Fri 09:00-17:00</code>. Closed days can be left out or written as Closed. Used in the schema markup.</p>';
+    }, 'general');
+});
+
+// Turn the address setting into a PostalAddress (last line = postcode, then town, remaining lines = street)
+function ajm_address_schema() {
+
+    // Get the address from options, split the address into lines, trim whitespace, and remove empty lines
+    $lines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', get_option('ajm_address', ajm_default_address())))));
+    if (count($lines) < 3) {
+        return null;
+    }
+
+    // Pop the last two lines for postcode and town, and join the remaining lines for street address
+    $postcode = array_pop($lines);
+    $town     = array_pop($lines);
+    return [
+        '@type'           => 'PostalAddress',
+        'streetAddress'   => implode(', ', $lines),
+        'addressLocality' => $town,
+        'postalCode'      => $postcode,
+        'addressCountry'  => 'GB',
+    ];
+}
+
+// Convert "9am", "9:30pm" or "17:00" to 24-hour HH:MM
+function ajm_time_24h($time, $meridiem) {
+    $parts = explode(':', $time);
+    $h = (int) $parts[0];
+    $m = isset($parts[1]) ? (int) $parts[1] : 0;
+    $meridiem = strtolower($meridiem);
+    if ($meridiem === 'pm' && $h < 12) {
+        $h += 12;
+    } elseif ($meridiem === 'am' && $h === 12) {
+        $h = 0;
+    }
+    return sprintf('%02d:%02d', $h, $m);
+}
+
+// Turn the opening hours setting into OpeningHoursSpecification objects
+// Accepts lines like "Mon-Fri 09:00-17:00" or "Monday: 9am - 5pm"; "Closed" lines are skipped
+function ajm_opening_hours_schema() {
+    $days = ['mon' => 'Monday', 'tue' => 'Tuesday', 'wed' => 'Wednesday', 'thu' => 'Thursday', 'fri' => 'Friday', 'sat' => 'Saturday', 'sun' => 'Sunday'];
+    $keys = array_keys($days);
+    $time = '(\d{1,2}(?::\d{2})?)\s*([ap]m)?';
+    $specs = [];
+    foreach (preg_split('/\r\n|\r|\n/', get_option('ajm_opening_hours', '')) as $line) {
+        if (!preg_match('/^\s*([a-z]{3})[a-z]*(?:\s*-\s*([a-z]{3})[a-z]*)?\s*:?\s*' . $time . '\s*(?:-|to)\s*' . $time . '\s*$/i', $line, $m)) {
+            continue;
+        }
+        $m += array_fill(0, 7, '');
+        $start = array_search(strtolower($m[1]), $keys);
+        $end   = $m[2] !== '' ? array_search(strtolower($m[2]), $keys) : $start;
+        if ($start === false || $end === false) {
+            continue;
+        }
+        $range = $start <= $end ? range($start, $end) : array_merge(range($start, 6), range(0, $end));
+        // "9 - 5pm": if the opening time has no am/pm, assume the closing one's applies unless that makes it open after it closes
+        $opens  = ajm_time_24h($m[3], $m[4]);
+        $closes = ajm_time_24h($m[5], $m[6]);
+        if ($m[4] === '' && $m[6] !== '' && $opens > $closes) {
+            $opens = ajm_time_24h($m[3], $m[6]);
+        }
+        $specs[] = [
+            '@type'     => 'OpeningHoursSpecification',
+            'dayOfWeek' => array_map(function ($i) use ($days, $keys) { return $days[$keys[$i]]; }, $range),
+            'opens'     => $opens,
+            'closes'    => $closes,
+        ];
+    }
+    return $specs;
+}
 
 ?>

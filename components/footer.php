@@ -39,6 +39,9 @@
                 <span>/</span>
                 <p><a href="/terms-and-conditions">Terms & Conditions</a></p>
             </div>
+            <div class="text-white mt-4">
+                <?php echo get_option('ajm_address', ajm_default_address()); ?>
+            </div>
         </div>
     </div>
 </footer>
