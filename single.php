@@ -36,12 +36,21 @@ get_template_part('components/header');
                     </div>
                     <?php the_content(); ?>
                 </div>
-                <?php get_template_part('components/button', null, [
-                    'url' => '/contact',
-                    'variant' => 'secondary',
-                    'additional_classes' => 'mt-8',
-                    'text' => 'Get In Touch',
-                ]); ?>
+                <?php $blog_link = get_field('blog_link'); ?>
+                <?php $blog_link_text = $blog_link['blog_link_text']; ?>
+                <?php $blog_link_url = $blog_link['blog_link_url']; ?>
+                <?php
+                    get_template_part(
+                    'components/button',
+                        null,
+                        [
+                            'text' => $blog_link_text ? $blog_link_text : 'Get In Touch',
+                            'url'  => $blog_link_url ? $blog_link_url : '/contact',
+                            'variant' => 'secondary',   
+                            'additional_classes' => 'mt-8'
+                        ]
+                    );
+                ?>
             </div>
             <div class="col-span-4 lg:block hidden">
                 <?php get_template_part('components/blog-sidebar', null, [
