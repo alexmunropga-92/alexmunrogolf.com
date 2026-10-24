@@ -198,6 +198,9 @@
   .visible {
     visibility: visible;
   }
+  .absolute {
+    position: absolute;
+  }
   .fixed {
     position: fixed;
   }
@@ -868,9 +871,6 @@
   .flex-col {
     flex-direction: column;
   }
-  .flex-wrap {
-    flex-wrap: wrap;
-  }
   .items-center {
     align-items: center;
   }
@@ -1004,9 +1004,6 @@
   .bg-blue {
     background-color: var(--color-blue);
   }
-  .bg-green-500 {
-    background-color: var(--color-green-500);
-  }
   .bg-white {
     background-color: var(--color-white);
   }
@@ -1063,9 +1060,6 @@
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
-  }
-  .py-3 {
-    padding-block: calc(var(--spacing) * 3);
   }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
