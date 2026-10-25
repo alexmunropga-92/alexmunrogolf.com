@@ -2,11 +2,17 @@
     <div class="container mx-auto transition-section" :class="show ? 'transition-section--visible' : ''">
             <div class="grid grid-cols-12 gap-4">
             <?php 
-                $blog_query = new WP_Query([
+                $query_args = [
                     'post_type'      => 'post',
                     'posts_per_page' => -1,
                     'orderby'        => 'date',
-                ]);
+                ];
+
+                if (is_category()) {
+                    $query_args['cat'] = get_queried_object_id();
+                }
+
+                $blog_query = new WP_Query($query_args);
 
                 while($blog_query->have_posts()) {
                     $blog_query->the_post() ?>
