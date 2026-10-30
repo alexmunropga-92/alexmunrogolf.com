@@ -17,7 +17,7 @@
       <div class="grid grid-cols-12 items-center h-full">
          <div class="col-span-2">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-               <img class="max-w-[70px]" src="<?php echo esc_url( $site_icon_url ); ?>" alt="Site Icon">
+               <img class="max-w-[70px]" height="70" width="70" src="<?php echo esc_url( $site_icon_url ); ?>" alt="Site Icon">
             </a>
          </div>
          <div class="col-span-10">

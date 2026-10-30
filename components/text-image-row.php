@@ -9,7 +9,7 @@
         <div class="grid grid-cols-12 md:gap-x-12 items-center">
             <div class="col-span-12 md:col-span-5 order-2 md:order-1">
                 <div class="max-w-[300px] md:max-w-none mx-auto sm:mt-0 mt-5">
-                    <img class="h-auto w-full" src="https://alexmunrogolf.com/wp-content/uploads/2026/02/alex_image.png" alt="Alex Munro, PGA Professional golf coach in Bristol" class="w-full rounded-md object-cover">
+                    <img height="700" width="460" class="h-auto w-full" src="https://alexmunrogolf.com/wp-content/uploads/2026/02/alex_image.png" alt="Alex Munro, PGA Professional golf coach in Bristol" class="w-full rounded-md object-cover">
                 </div>
             </div>
             <div class="col-span-12 md:col-span-7 order-1 md:order-2">

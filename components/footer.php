@@ -10,7 +10,7 @@
     <div class="container mx-auto py-8 sm:py-[3rem]">
         <div class="grid grid-cols-12 items-center text-center sm:text-start gap-y-5 sm:gap-0">
             <div class="col-span-12 sm:col-span-2">
-                <img class="max-w-[70px] mx-auto sm:ms-0" src="<?php echo esc_url( $site_icon_url ); ?>" alt="Site Icon">
+                <img height="70" width="70" class="max-w-[70px] mx-auto sm:ms-0" src="<?php echo esc_url( $site_icon_url ); ?>" alt="Site Icon">
             </div>
             <div class="col-span-12 sm:col-span-5 text-sm md:text-base">
                 <?php wp_nav_menu(array(
