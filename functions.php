@@ -25,21 +25,21 @@ function amg_enqueue_styles() {
 }
 
 //Custom Post Types
-function register_services() {
-    register_post_type('services', [
+function register_golf_coaching() {
+    register_post_type('golf-coaching', [
         'labels' => [
-            'name' => 'Services',
+            'name' => 'Golf Coaching',
             'singular_name' => 'Service',
             'add_new_item'       => 'Add New Service',
         ],
         'public' => true,
         'has_archive' => true,
-        'rewrite' => ['slug' => 'services'],
+        'rewrite' => ['slug' => 'golf-coaching'],
         'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
         'menu_icon' => 'dashicons-portfolio',
     ]);
 }
-add_action('init', 'register_services');
+add_action('init', 'register_golf_coaching');
 
 // FAQ Custom Post Type
 function register_faq() {
@@ -228,7 +228,7 @@ add_action('wp_head', function () {
     }
 
     // Get all published services and create Offer objects for each
-    $services = get_posts(['post_type' => 'services', 'posts_per_page' => -1, 'post_status' => 'publish']);
+    $golf_coaching = get_posts(['post_type' => 'golf-coaching', 'posts_per_page' => -1, 'post_status' => 'publish']);
     $offers = array_map(function ($service) {
         return [
             '@type'       => 'Offer',
@@ -239,7 +239,7 @@ add_action('wp_head', function () {
                 'url'         => get_permalink($service),
             ],
         ];
-    }, $services);
+    }, $golf_coaching);
 
     // Define the business schema with relevant details
     $business = [
@@ -309,7 +309,7 @@ add_action('wp_head', function () {
 
 //Service schema (single service pages)
 add_action('wp_head', function () {
-    if (!is_singular('services')) {
+    if (!is_singular('golf-coaching')) {
         return;
     }
     $schema = [
@@ -367,10 +367,10 @@ add_action('wp_head', function () {
 
 //Services archive: use the SEO title and description from the Services page (ID 84)
 add_filter('wpseo_title', function ($title) {
-    return is_post_type_archive('services') ? (get_post_meta(84, '_yoast_wpseo_title', true) ?: $title) : $title;
+    return is_post_type_archive('golf-coaching') ? (get_post_meta(84, '_yoast_wpseo_title', true) ?: $title) : $title;
 });
 add_filter('wpseo_metadesc', function ($desc) {
-    return is_post_type_archive('services') ? (get_post_meta(84, '_yoast_wpseo_metadesc', true) ?: $desc) : $desc;
+    return is_post_type_archive('golf-coaching') ? (get_post_meta(84, '_yoast_wpseo_metadesc', true) ?: $desc) : $desc;
 });
 
 // Business address setting (Settings > General), used in the footer

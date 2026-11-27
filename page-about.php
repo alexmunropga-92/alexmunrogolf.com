@@ -41,6 +41,17 @@ get_template_part('components/header');
         <div class="prose py-12 max-w-none text-[var(--blue)] [&>h3]:text-[var(--blue)] [&>h2]:text-[var(--blue)]">
             <?php the_content(); ?>
         </div>
+        <?php
+            get_template_part(
+            'components/button',
+                null,
+                [
+                    'text' => 'Get In Touch',
+                    'url'  => '/contact',
+                    'variant' => 'secondary',   
+                ]
+            );
+        ?>
     </div>
 </section>
 <?php get_template_part('components/faq-block'); ?>
